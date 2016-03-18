@@ -1,8 +1,7 @@
 ﻿#include "xmldata.h"
 XmlData::XmlData(){
-    QString path = "F:\sample.xml";
-    QVector<Project> *projects = getProjects(path);
-
+    path = "F:\sample.xml";
+    QVector<Project> *projects = getProjects();
     Project tmpProject;
     int projectsCount = projects->size();
     cout << "Projects in xml: " << projectsCount << endl;
@@ -19,9 +18,14 @@ XmlData::XmlData(){
     }
     delete projects;
 }
-QVector<Project> *XmlData::getProjects(QString xmlFilePath){
+
+void XmlData::setPath(QString path)
+{
+    this->path=path;
+}
+QVector<Project> *XmlData::getProjects(){
     QVector<Project> *projects = new QVector<Project>();
-    QFile* file = new QFile(xmlFilePath);
+    QFile* file = new QFile(path);
     if (openFile(file)) {
         QXmlStreamReader *xmlReader = new QXmlStreamReader(file);
         xmlReader->readNextStartElement();
@@ -49,6 +53,8 @@ bool XmlData::openFile(QFile *file){
 bool XmlData::isProject(QXmlStreamReader *xmlReader){
     return  xmlReader->isStartElement() && xmlReader->name() == "project";
 }
+
+
 Project *XmlData::getProjectByXmlReader(QXmlStreamReader *xmlReader){
     QXmlStreamAttributes attributes = xmlReader->attributes();
 
@@ -75,6 +81,8 @@ QVector<Version> *XmlData::getVersions(QXmlStreamReader *xmlReader){
 bool XmlData::isVersion(QXmlStreamReader *xmlReader){
     return  xmlReader->isStartElement() && xmlReader->name() == "version";
 }
+
+
 Version *XmlData::getVersionByXmlReader(QXmlStreamReader *xmlReader){
     QXmlStreamAttributes attributes = xmlReader->attributes();
     int id = attributes[0].value().toInt();
@@ -84,6 +92,8 @@ Version *XmlData::getVersionByXmlReader(QXmlStreamReader *xmlReader){
     delete elements;
     return version;
 }
+
+
 QVector<Element> *XmlData::getElements(QXmlStreamReader *xmlReader){
     QVector<Element> *elements = new QVector<Element>();
     xmlReader->readNextStartElement();
@@ -97,9 +107,12 @@ QVector<Element> *XmlData::getElements(QXmlStreamReader *xmlReader){
     }
     return elements;
 }
+
+
 bool XmlData::isElement(QXmlStreamReader *xmlReader){
     return xmlReader->name() == "file" || xmlReader->name() == "folder";
 }
+
 Element *XmlData::getElementByAttributes(QXmlStreamAttributes attributes){
     int id = attributes[0].value().toInt();
     int parentId = attributes[1].value().toInt();

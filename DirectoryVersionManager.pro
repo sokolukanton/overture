@@ -18,14 +18,20 @@ SOURCES += main.cpp\
     projectcreatingform.cpp \
     versiondetailsform.cpp \
     versioncreatingform.cpp \
-    xmldata.cpp
+    xmldata.cpp \
+    Project.cpp \
+    Version.cpp \
+    Element.cpp
 
 HEADERS  += mainwindow.h \
     versionlistform.h \
     projectcreatingform.h \
     versiondetailsform.h \
     versioncreatingform.h \
-    xmldata.h
+    xmldata.h \
+    Project.h \
+    Version.h \
+    Element.h
 
 FORMS    += mainwindow.ui \
     versionlistform.ui \

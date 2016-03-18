@@ -2,11 +2,14 @@
 #include "ui_mainwindow.h"
 #include "xmldata.h"
 #include <QInputDialog>
+#include <qstringlist.h>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    _xmlreader=new XmlData();
+    _xmlreader->setPath("sample.xml");
     connect(ui->pushButton_4,SIGNAL(clicked()),this,SLOT(deleteConfirm()));
     connect(ui->pushButton_3,SIGNAL(clicked()),this,SLOT(showRenamingForm()));
     connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(showVersionList()));
@@ -15,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->action_2,SIGNAL(triggered(bool)),this,SLOT(showVersionList()));
     connect(ui->action_3,SIGNAL(triggered(bool)),this,SLOT(showRenamingForm()));
     connect(ui->action_4,SIGNAL(triggered(bool)),this,SLOT(deleteConfirm()));
+    updateProjectsList();
 }
 
 
@@ -54,6 +58,14 @@ void MainWindow::showProjectCreatingForm()
     prjCreatingForm=new ProjectCreatingForm();
     prjCreatingForm->show();
     prjCreatingForm->setAttribute(Qt::WA_DeleteOnClose);
+}
+
+void MainWindow::updateProjectsList()
+{
+    _projects=_xmlreader->getProjects();
+    QStringList slist;
+    for(auto it:*_projects) slist.append(it.getName());
+    ui->listWidget->addItems(slist);
 }
 
 void MainWindow::closeEvent(QCloseEvent * ev)

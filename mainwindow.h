@@ -6,6 +6,8 @@
 #include "versionlistform.h"
 #include "projectcreatingform.h"
 #include <QCloseEvent>
+#include <QVector>
+#include <xmldata.h>
 namespace Ui {
 class MainWindow;
 }
@@ -22,6 +24,7 @@ private slots:
     void showRenamingForm();
     void showVersionList();
     void showProjectCreatingForm();
+    void updateProjectsList();
     void closeEvent(QCloseEvent *);
 
 private:
@@ -29,6 +32,8 @@ private:
     QMessageBox * deleteConfirming;
     VersionListForm * versionListForm;
     ProjectCreatingForm * prjCreatingForm;
+    QVector <Project> * _projects;
+    XmlData * _xmlreader;
 };
 
 #endif // MAINWINDOW_H
