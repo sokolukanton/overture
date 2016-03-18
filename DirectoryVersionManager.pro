@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     versionlistform.cpp \
     projectcreatingform.cpp \
     versiondetailsform.cpp \
-    versioncreatingform.cpp
+    versioncreatingform.cpp \
+    xmldata.cpp
 
 HEADERS  += mainwindow.h \
     versionlistform.h \
     projectcreatingform.h \
     versiondetailsform.h \
-    versioncreatingform.h
+    versioncreatingform.h \
+    xmldata.h
 
 FORMS    += mainwindow.ui \
     versionlistform.ui \
