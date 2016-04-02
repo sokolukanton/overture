@@ -5,24 +5,35 @@
 class Element
 {
 private:
-    int _id;
-    int _parentId;
-    QString _name;
     QString _path;
+    bool _isNew;
+    bool _isDeleted;
+    bool _isFolder;
+    int _versionId;
 public:
     Element();
-    Element(int id,int parentId,QString name,QString path): _id(id), _parentId(parentId), _name(name), _path(path){}
-    const int getId(){
-        return _id;
-    }
-    const int getParentId(){
-        return _parentId;
-    }
-    const QString getName(){
-        return _name;
-    }
-    const QString getPath(){
+    Element(QString path,bool isnew,bool isdeleted):_path(path),_isNew(isnew),_isDeleted(isdeleted){}
+    QString getPath()const{
         return _path;
+    }
+    int getVersionId()const{
+        return _versionId;
+    }
+    void setVersionId(int versionId){
+        _versionId=versionId;
+    }
+    bool isNew()const{
+        return _isNew;
+    }
+    bool isDeleted()const{
+        return _isDeleted;
+    }
+    bool isFolder()const{
+        return _isFolder;
+    }
+
+    void setType(const int type){
+        _isFolder=type;
     }
 };
 

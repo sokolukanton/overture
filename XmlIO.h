@@ -2,31 +2,37 @@
 #define XMLIO_H
 
 #include <QDomDocument>
-#include <QDirIterator>
 #include <QFile>
-#include <QVector>
 #include <QDebug>
 #include "Project.h"
-
+#include "Reader.h"
+#include <QVector>
 
 class XmlIO
 {
 public:
-    XmlIO(const QString &);
-
+    XmlIO(const QString & );
+    static void createFile(const QString &);
+    QString getFilePath();
     void appendProject(const Project &);
-    void appendVersion(const Version &);
-
+    void appendVersion(const uint, const Version &);
+    void renameProject(const uint, const QString &);
+    void renameVersion(const uint, const uint, const QString &);
+    void setCurrentVersion(const uint, const uint);
+    void eraseProject(const uint);
+    void eraseVersion(const uint, const uint);
     void flush();
 
 private:
     QDomDocument* _currentDocument;
     QFile* _currentFile;
-    QDomElement _dRoot;
+    QDomElement _initialRoot;
+    QDomElement _projectRoot;
 
     void _initXML();
+    void _appendElements(QDomElement &, const QVector<Element> &);
     void _validateFileOpening(const QString &);
-    void _appendElements(const QVector<Element> &);
+    void _appendVersion(const Version &);
     void _setElementAttributes(QDomElement &, const Element &);
     void _setVersionAttributes(QDomElement &, const Version &);
     void _setProjectAttributes(QDomElement &, const Project &);

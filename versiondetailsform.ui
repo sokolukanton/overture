@@ -9,51 +9,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>331</height>
+    <width>613</width>
+    <height>428</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Файлы версии</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0" colspan="2">
-    <widget class="QTreeWidget" name="treeWidget">
-     <column>
-      <property name="text">
-       <string>1</string>
-      </property>
-     </column>
-     <item>
-      <property name="text">
-       <string>1.1</string>
-      </property>
-      <item>
-       <property name="text">
-        <string>1.1.1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>1.1.2</string>
-       </property>
-       <item>
-        <property name="text">
-         <string>1.1.2.1</string>
-        </property>
-        <property name="font">
-         <font>
-          <family>Comic Sans MS</family>
-         </font>
-        </property>
-       </item>
-      </item>
-     </item>
-     <item>
-      <property name="text">
-       <string>1.2</string>
-      </property>
-     </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Назад</string>
+     </property>
     </widget>
    </item>
    <item row="1" column="0">
@@ -63,18 +31,41 @@
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>298</width>
+       <width>40</width>
        <height>20</height>
       </size>
      </property>
     </spacer>
    </item>
-   <item row="1" column="1">
-    <widget class="QPushButton" name="pushButton">
-     <property name="text">
-      <string>Назад</string>
-     </property>
-    </widget>
+   <item row="0" column="0" colspan="2">
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="0" column="0">
+      <widget class="QRadioButton" name="radioButton">
+       <property name="text">
+        <string>Файлы добавленные версией</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup</string>
+       </attribute>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QRadioButton" name="radioButton_2">
+       <property name="text">
+        <string>Файлы измененнные следующей версией</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup</string>
+       </attribute>
+      </widget>
+     </item>
+     <item row="1" column="0" colspan="2">
+      <widget class="QTreeView" name="treeView"/>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
@@ -97,4 +88,7 @@
    </hints>
   </connection>
  </connections>
+ <buttongroups>
+  <buttongroup name="buttonGroup"/>
+ </buttongroups>
 </ui>

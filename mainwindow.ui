@@ -37,8 +37,11 @@
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
          <widget class="QPushButton" name="pushButton">
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Добавить новый проект&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
-           <string>Добавить</string>
+           <string>Добавить </string>
           </property>
          </widget>
         </item>
@@ -47,8 +50,11 @@
           <property name="enabled">
            <bool>true</bool>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Открыть в новом окне список версий проекта&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
-           <string>Показать</string>
+           <string>Показать детали</string>
           </property>
          </widget>
         </item>
@@ -125,7 +131,7 @@
   </action>
   <action name="action_2">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Список версий</string>
@@ -133,7 +139,7 @@
   </action>
   <action name="action_3">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Переименовать</string>
@@ -141,7 +147,7 @@
   </action>
   <action name="action_4">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Удалить</string>

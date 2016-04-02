@@ -6,8 +6,11 @@
 #include "versionlistform.h"
 #include "projectcreatingform.h"
 #include <QCloseEvent>
-#include <QVector>
-#include <xmldata.h>
+#include "Project.h"
+#include <qstringlist.h>
+#include <QSettings>
+#include <QTextCodec>
+#include <qdebug.h>
 namespace Ui {
 class MainWindow;
 }
@@ -23,17 +26,21 @@ private slots:
     void deleteConfirm();
     void showRenamingForm();
     void showVersionList();
-    void showProjectCreatingForm();
-    void updateProjectsList();
+    void showProjectCreatingForm();   
     void closeEvent(QCloseEvent *);
 
 private:
+    void updateProjectsList();
+    QString readIni();
+    QString createIni();
     Ui::MainWindow * ui;
+    QString storagePath;
     QMessageBox * deleteConfirming;
     VersionListForm * versionListForm;
     ProjectCreatingForm * prjCreatingForm;
     QVector <Project> * _projects;
-    XmlData * _xmlreader;
+    XmlIO * _xmlwriter;
+    QString _storagePath;
 };
 
 #endif // MAINWINDOW_H

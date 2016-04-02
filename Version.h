@@ -13,14 +13,17 @@ private:
 public:
     Version();
     Version(int id, QString name, QVector<Element> elements):_id(id), _name(name), _elements(elements){}
-    int getId(){
+    int getId()const{
         return _id;
     }
-    QString getName(){
+    QString getName()const{
         return _name;
     }
-    QVector<Element> getElements(){
+    QVector<Element> getElements()const{
         return _elements;
+    }
+    void setName(QString &name){
+        _name=name;
     }
 };
 
