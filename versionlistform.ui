@@ -34,6 +34,9 @@
      </item>
      <item row="1" column="0">
       <widget class="QPushButton" name="pushButton_2">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Перейти к выбранной версии&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="text">
         <string>Перейти </string>
        </property>
@@ -60,6 +63,9 @@
          <kerning>true</kerning>
         </font>
        </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Добавить новую версию&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="text">
         <string>Добавить</string>
        </property>
@@ -67,6 +73,9 @@
      </item>
      <item row="3" column="0">
       <widget class="QPushButton" name="pushButton_3">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Открыть в новом окне список файлов,которые изменила или удалила эта версия&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="text">
         <string>Список файлов </string>
        </property>
