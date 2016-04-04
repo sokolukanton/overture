@@ -2,13 +2,17 @@
 #define VERSIONCREATINGFORM_H
 
 #include <QDialog>
-#include <Project.h>
-#include "QFileSystemModel"
+#include <QFileDialog>
+#include <QFileSystemModel>
 #include <QModelIndex>
+#include <QStringList>
+#include "addnewfolderform.h"
+#include "filemover.h"
+#include "Project.h"
 
 
 namespace Ui {
-class VersionCreatingForm;
+    class VersionCreatingForm;
 }
 
 class VersionCreatingForm : public QDialog
@@ -19,10 +23,22 @@ public:
     explicit VersionCreatingForm(const QString &, QWidget *parent = 0);
     ~VersionCreatingForm();
 
+public slots:
+    void getNewFolderName(const QString &);
+
+private slots:
+    void setFileOnDelete();
+    void addFile();
+    void createFolderInVersion();
+
 private:
     Ui::VersionCreatingForm *ui;
-    QFileSystemModel* fsModel;
-    QModelIndex* mdIndex;
+    AddNewFolderForm* newFolderForm;
+    QFileSystemModel* _fsModel;
+    QModelIndex* _mdIndex;
+    QStringList _filesToAdd;
+    QStringList _filesToDelete;
+    QStringList _newFolders;
 
 };
 

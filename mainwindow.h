@@ -9,7 +9,6 @@
 #include "Project.h"
 #include <qstringlist.h>
 #include <QSettings>
-#include <QTextCodec>
 #include <qdebug.h>
 
 namespace Ui {

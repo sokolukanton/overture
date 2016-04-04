@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     Element.cpp \
     Reader.cpp \
     XmlIO.cpp \
-    filemover.cpp
+    filemover.cpp \
+    addnewfolderform.cpp
 
 HEADERS  += mainwindow.h \
     versionlistform.h \
@@ -36,10 +37,12 @@ HEADERS  += mainwindow.h \
     Element.h \
     Reader.h \
     XmlIO.h \
-    filemover.h
+    filemover.h \
+    addnewfolderform.h
 
 FORMS    += mainwindow.ui \
     versionlistform.ui \
     projectcreatingform.ui \
     versiondetailsform.ui \
-    versioncreatingform.ui
+    versioncreatingform.ui \
+    addnewfolderform.ui

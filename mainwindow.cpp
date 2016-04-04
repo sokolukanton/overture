@@ -1,11 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QTextCodec::setCodecForLocale(QTextCodec::codecForName("utf-8"));
     _storagePath=_readIni();
     _xmlwriter=new XmlIO(_storagePath + "data.xml");
     _projects=new QVector<Project>();
@@ -71,8 +71,8 @@ void MainWindow::showRenamingForm()
 void MainWindow::showVersionList()
 {
     int i=ui->listWidget->currentRow();
-    versionListForm=new VersionListForm((*_projects)[i],_storagePath,_xmlwriter);
-    versionListForm->setProjectPath(i+1);
+    versionListForm=new VersionListForm(_projects -> at(i), _projects -> at(i)
+                                        .getOriginPath(), _storagePath,_xmlwriter);
     versionListForm->show();
     versionListForm->setAttribute(Qt::WA_DeleteOnClose);
 }

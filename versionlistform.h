@@ -18,11 +18,8 @@ class VersionListForm : public QDialog
     Q_OBJECT
 
 public:
-    explicit VersionListForm(Project &, const QString &, XmlIO *, QWidget *parent = 0);
+    explicit VersionListForm(const Project &, const QString &, const QString &, XmlIO *, QWidget *parent = 0);
     ~VersionListForm();
-    void setProjectPath(int i){
-        _projectPath="Project "+QString::number(i)+"/";
-    }
 
 private slots:
     void showVersionDetailsForm();
@@ -33,12 +30,12 @@ private slots:
 
 private:
     void updateVersionsList();
-    Ui::VersionListForm *ui;
-    VersionDetailsForm * versionDetailsForm;
-    QMessageBox * deleteConfirming;
-    QMessageBox * moveConfirming;
-    VersionCreatingForm * versionCreatingForm;
-    Project *_project;
+    Ui::VersionListForm* ui;
+    VersionDetailsForm* versionDetailsForm;
+    QMessageBox* deleteConfirming;
+    QMessageBox* moveConfirming;
+    VersionCreatingForm* versionCreatingForm;
+    Project _project;
     QString _projectPath;
     QString _storagePath;
     XmlIO * _xmlwriter;

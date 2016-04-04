@@ -18,8 +18,10 @@ class VersionDetailsForm : public QDialog
 public:
     explicit VersionDetailsForm(Version &,QString ,int,QWidget *parent = 0);
     ~VersionDetailsForm();
+
 private slots:
     void chooseDir();
+
 private:
     Ui::VersionDetailsForm *ui;
     int _versionNumber;
