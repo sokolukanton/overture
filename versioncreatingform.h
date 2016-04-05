@@ -2,6 +2,7 @@
 #define VERSIONCREATINGFORM_H
 
 #include <QDialog>
+#include <QDir>
 #include <QFileDialog>
 #include <QFileSystemModel>
 #include <QModelIndex>
@@ -20,7 +21,7 @@ class VersionCreatingForm : public QDialog
     Q_OBJECT
 
 public:
-    explicit VersionCreatingForm(const QString &, QWidget *parent = 0);
+    explicit VersionCreatingForm(const QString &, const QString &, const uint, QWidget *parent = 0);
     ~VersionCreatingForm();
 
 public slots:
@@ -30,16 +31,22 @@ private slots:
     void setFileOnDelete();
     void addFile();
     void createFolderInVersion();
+    void cancelClicked();
+    void okClicked();
 
 private:
     Ui::VersionCreatingForm *ui;
     AddNewFolderForm* newFolderForm;
     QFileSystemModel* _fsModel;
     QModelIndex* _mdIndex;
-    QStringList _filesToAdd;
+    QString _projectPath;
+    QString _storagetPath;
+    QStringList _filesToAddFrom;
+    QStringList _filesToAddTo;
     QStringList _filesToDelete;
     QStringList _newFolders;
 
+    uint _newVersionId;
 };
 
 #endif // VERSIONCREATINGFORM_H

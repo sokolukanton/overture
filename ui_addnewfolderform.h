@@ -39,7 +39,7 @@ public:
     {
         if (AddNewFolderForm->objectName().isEmpty())
             AddNewFolderForm->setObjectName(QStringLiteral("AddNewFolderForm"));
-        AddNewFolderForm->resize(312, 152);
+        AddNewFolderForm->resize(312, 126);
         gridLayout_3 = new QGridLayout(AddNewFolderForm);
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         horizontalSpacer_3 = new QSpacerItem(127, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -50,6 +50,7 @@ public:
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         okButton = new QPushButton(AddNewFolderForm);
         okButton->setObjectName(QStringLiteral("okButton"));
+        okButton->setEnabled(false);
 
         gridLayout->addWidget(okButton, 0, 0, 1, 1);
 
@@ -78,13 +79,14 @@ public:
 
 
         retranslateUi(AddNewFolderForm);
+        QObject::connect(cancelButton, SIGNAL(clicked()), AddNewFolderForm, SLOT(close()));
 
         QMetaObject::connectSlotsByName(AddNewFolderForm);
     } // setupUi
 
     void retranslateUi(QWidget *AddNewFolderForm)
     {
-        AddNewFolderForm->setWindowTitle(QApplication::translate("AddNewFolderForm", "Form", 0));
+        AddNewFolderForm->setWindowTitle(QApplication::translate("AddNewFolderForm", "\320\241\320\276\320\267\320\264\320\260\320\275\320\270\320\265 \320\277\320\260\320\277\320\272\320\270", 0));
         okButton->setText(QApplication::translate("AddNewFolderForm", "\320\236\320\232", 0));
         cancelButton->setText(QApplication::translate("AddNewFolderForm", "\320\236\321\202\320\274\320\265\320\275\320\260", 0));
         label->setText(QApplication::translate("AddNewFolderForm", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265, \320\277\320\276\320\266\320\260\320\273\321\203\320\271\321\201\321\202\320\260, \320\270\320\274\321\217 \320\277\320\260\320\277\320\272\320\270:", 0));

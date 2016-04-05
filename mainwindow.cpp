@@ -107,34 +107,11 @@ QString MainWindow::_readIni()
         path = _createIni();
     }
 
-    path+="/";
+    path += "/";
     return path;
 }
 
-bool MainWindow::_removeDir(const QString& dirName)
-{
-    bool result = true;
-    QDir dir(dirName);
 
-    if (dir.exists(dirName)) {
-        foreach(QFileInfo info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System |
-                                                  QDir::Hidden  | QDir::AllDirs |
-                                                  QDir::Files, QDir::DirsFirst)) {
-            if (info.isDir()) {
-                result = _removeDir(info.absoluteFilePath());
-            } else {
-                result = QFile::remove(info.absoluteFilePath());
-            }
-
-            if (!result) {
-                return result;
-            }
-        }
-        result = dir.rmdir(dirName);
-    }
-
-    return result;
-}
 
 QString MainWindow::_createIni()
 {
@@ -153,7 +130,7 @@ QString MainWindow::_createIni()
 
 void MainWindow::_deleteProjectFolder(const QString& projName)
 {
-    _removeDir(_storagePath + projName);
+    FileMover::removeDir(_storagePath + projName);
 }
 
 void MainWindow::closeEvent(QCloseEvent * ev)

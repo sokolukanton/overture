@@ -2,10 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <qmessagebox.h>
+#include <QCloseEvent>
+#include <QMessageBox>
 #include "versionlistform.h"
 #include "projectcreatingform.h"
-#include <QCloseEvent>
 #include "Project.h"
 #include <qstringlist.h>
 #include <QSettings>
@@ -44,7 +44,6 @@ private:
     void _updateProjectsList();
     QString _createIni();
     QString _readIni();
-    bool _removeDir(const QString &);
 };
 
 #endif // MAINWINDOW_H

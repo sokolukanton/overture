@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>312</width>
-    <height>152</height>
+    <height>126</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Создание папки</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="1" column="0">
@@ -31,6 +31,9 @@
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <widget class="QPushButton" name="okButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string>ОК</string>
        </property>
@@ -62,5 +65,22 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cancelButton</sender>
+   <signal>clicked()</signal>
+   <receiver>AddNewFolderForm</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>268</x>
+     <y>98</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>263</x>
+     <y>142</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

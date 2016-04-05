@@ -5,7 +5,6 @@ FileMover::FileMover(const QString & originalPath,const QString & reservoirPath)
     _storagePath(reservoirPath),                                           //вносим путь к файлам в хранилище(!наличие "/" в конце!)
     _originPath(originalPath)                                          //вносим путь к файлам выбранного проекта(!наличие "/" в конце!)
 {
-
 }
 
 bool FileMover::moveFile(const QString& oldName, const QString& newName)
@@ -25,6 +24,31 @@ bool FileMover::copyFile(const QString& from, const QString& to)
         newFile.remove();
     }
     return QFile::copy(from,to);
+}
+
+bool FileMover::removeDir(const QString& dirName)
+{
+    bool result = true;
+    QDir dir(dirName);
+
+    if (dir.exists(dirName)) {
+        foreach(QFileInfo info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System |
+                                                  QDir::Hidden  | QDir::AllDirs |
+                                                  QDir::Files, QDir::DirsFirst)) {
+            if (info.isDir()) {
+                result = removeDir(info.absoluteFilePath());
+            } else {
+                result = QFile::remove(info.absoluteFilePath());
+            }
+
+            if (!result) {
+                return result;
+            }
+        }
+        result = dir.rmdir(dirName);
+    }
+
+    return result;
 }
 
 void FileMover::moveFilesWhenJump(const QMap<QString,Element> &tomove,const QMap<QString,Element> & todelete, QString prjNum)
@@ -58,12 +82,7 @@ void FileMover::moveFilesWhenRollback(const QMap<QString,Element> &tomove,const 
             QFile::remove(_originPath+it.value().getPath());
         else dir.rmdir(_originPath+it.value().getPath());
     }
-    /*for(auto elem:todelete.cend()){
-        qDebug()<<"delete from "+_originPath+elem.getPath();
-        if(!elem.isFolder())
-        QFile::remove(_originPath+elem.getPath());
-        else dir.rmdir(_originPath+elem.getPath());
-    }*/
+
     for(auto elem:tomove) {
         QString from=_storagePath+"Project "+prjNum+ "/Version " + QString::number(elem.getVersionId()) +
                 +"/changed" + elem.getPath();
