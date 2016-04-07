@@ -21,7 +21,8 @@ class VersionCreatingForm : public QDialog
     Q_OBJECT
 
 public:
-    explicit VersionCreatingForm(const QString &, const QString &, const uint, QWidget *parent = 0);
+    explicit VersionCreatingForm(const QString &, const Project &,
+                                 const Version &, QWidget *parent = 0);
     ~VersionCreatingForm();
 
 public slots:
@@ -39,14 +40,15 @@ private:
     AddNewFolderForm* newFolderForm;
     QFileSystemModel* _fsModel;
     QModelIndex* _mdIndex;
-    QString _projectPath;
+
     QString _storagetPath;
+    Project _thisProject;
+    Version _currentVersion;
+
     QStringList _filesToAddFrom;
     QStringList _filesToAddTo;
     QStringList _filesToDelete;
     QStringList _newFolders;
-
-    uint _newVersionId;
 };
 
 #endif // VERSIONCREATINGFORM_H

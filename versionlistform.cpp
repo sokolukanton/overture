@@ -34,7 +34,7 @@ void VersionListForm::showVersionDetailsForm()
 
 void VersionListForm::showVersionCreatingForm()
 {
-    versionCreatingForm = new VersionCreatingForm(_projectPath, _storagePath, _project.getVersions().last().getId() + 1);
+    versionCreatingForm = new VersionCreatingForm(_storagePath, _project, _project.getCurrentVersion());
     versionCreatingForm->show();
     versionCreatingForm->setAttribute(Qt::WA_DeleteOnClose);
 }

@@ -183,5 +183,5 @@ void XmlIO::_setProjectAttributes(QDomElement& project, const Project& source)
     project.setAttribute("id", source.getId());
     project.setAttribute("name", source.getName());
     project.setAttribute("origin_path", source.getOriginPath());
-    project.setAttribute("currentversion",source.getCurrentVersionId());
+    project.setAttribute("currentversion", source.getCurrentVersionId());
 }

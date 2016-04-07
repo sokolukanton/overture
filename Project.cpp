@@ -25,12 +25,9 @@ void Project::jumpToVersion(int versionId,QString prjNum, QString storagePath)
                 }
         }
     }
-    _currentVersionId=versionId;
-    /*for(auto it:tomove) qDebug()<<it.getPath()<<' '<<it.getVersionId();
-    qDebug()<<"todel";
-    for(auto it:todelete) qDebug()<<it.getPath()<<' '<<it.getVersionId();*/
-    FileMover mover(_originPath,storagePath);
-    mover.moveFilesWhenJump(tomove,todelete,prjNum);
+    _currentVersionId = versionId;
+    FileMover(_originPath,storagePath)
+            .moveFilesWhenJump(tomove,todelete,prjNum);
 }
 
 void Project::rollbackToversion(int versionId, QString prjNum, QString storagePath)
@@ -53,11 +50,8 @@ void Project::rollbackToversion(int versionId, QString prjNum, QString storagePa
         }
     for(auto it:todelete)
         tomove.remove(it.getPath());
-    _currentVersionId=versionId;
-    /*for(auto it:tomove) qDebug()<<it.getPath()<<it.getVersionId();
-    qDebug()<<"todel";
-    for(auto it:todelete) qDebug()<<it.getPath()<<it.getVersionId();*/
-    FileMover mover(_originPath,storagePath);
-    mover.moveFilesWhenRollback(tomove,todelete,prjNum);
+    _currentVersionId = versionId;
+    FileMover(_originPath,storagePath)
+            .moveFilesWhenRollback(tomove, todelete, prjNum);
 }
 

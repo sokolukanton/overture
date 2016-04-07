@@ -2,19 +2,18 @@
 #include <QDebug>
 
 FileMover::FileMover(const QString & originalPath,const QString & reservoirPath):
-    _storagePath(reservoirPath),                                           //вносим путь к файлам в хранилище(!наличие "/" в конце!)
-    _originPath(originalPath)                                          //вносим путь к файлам выбранного проекта(!наличие "/" в конце!)
+    _storagePath(reservoirPath),
+    _originPath(originalPath)
 {
 }
 
 bool FileMover::moveFile(const QString& oldName, const QString& newName)
 {
-    qDebug()<<oldName<<' '<<newName;
     QFile newFile(newName);
     if (newFile.exists()) {
         newFile.remove();
     }
-    return QFile::rename(oldName,newName);
+    return QFile::rename(oldName, newName);
 }
 
 bool FileMover::copyFile(const QString& from, const QString& to)
@@ -23,7 +22,7 @@ bool FileMover::copyFile(const QString& from, const QString& to)
     if (newFile.exists()) {
         newFile.remove();
     }
-    return QFile::copy(from,to);
+    return QFile::copy(from, to);
 }
 
 bool FileMover::removeDir(const QString& dirName)

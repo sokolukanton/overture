@@ -6,9 +6,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    _storagePath=_readIni();
-    _xmlwriter=new XmlIO(_storagePath + "data.xml");
-    _projects=new QVector<Project>();
+    _storagePath = _readIni();
+    _xmlwriter = new XmlIO(_storagePath + "data.xml");
+    _projects = new QVector<Project>();
     Reader::readXmlContents(*_projects, _storagePath + "data.xml");
 
     connect(ui->pushButton_4,SIGNAL(clicked()),this,SLOT(deleteConfirm()));
@@ -116,7 +116,7 @@ QString MainWindow::_readIni()
 QString MainWindow::_createIni()
 {
     QSettings settings("settings.ini",QSettings::IniFormat);
-    QString dirpath = QFileDialog::getExistingDirectory(this, tr("Выберите папку в которой создастся хранилище"),"/home",
+    QString dirpath = QFileDialog::getExistingDirectory(this, tr("Выберите папку, в которой расположится хранилище"),"/home",
                                                     QFileDialog::ShowDirsOnly| QFileDialog::DontResolveSymlinks);
     QDir dir;
     dir.cd(dirpath);

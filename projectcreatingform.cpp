@@ -32,7 +32,7 @@ void ProjectCreatingForm::addProject()
                     elements.append(element);
                  }
             }
-            Version firstVersion(1, "Version 1 (Original)", elements);
+            Version firstVersion(1, "Version 1", elements);
             QVector<Version> versions;
             versions.append(firstVersion);
             if(!_projects -> isEmpty()) {
