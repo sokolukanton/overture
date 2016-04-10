@@ -17,9 +17,9 @@ VersionCreatingForm::VersionCreatingForm(const QString& storagePath, const Proje
     ui->treeView->setModel(_fsModel);
     ui->treeView->setRootIndex(*_mdIndex);
 
-    connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(setFileOnDelete()));
-    connect(ui->pushButton_3, SIGNAL(clicked()), this, SLOT(addFile()));
-    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(createFolderInVersion()));
+    connect(ui->deleteButton, SIGNAL(clicked()), this, SLOT(setFileOnDelete()));
+    connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addFile()));
+    connect(ui->folderCreateButton, SIGNAL(clicked()), this, SLOT(createFolderInVersion()));
     connect(ui->okButton, SIGNAL(clicked()), this, SLOT(okClicked()));
     connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(cancelClicked()));
 }
@@ -36,14 +36,15 @@ void VersionCreatingForm::getNewFolderName(const QString& folderName)
                             *_mdIndex : ui->treeView->currentIndex(), folderName);
         if (!ui->treeView->currentIndex().isValid()) {
             _newFolders << _thisProject.getOriginPath() + "/" + folderName;
-            qDebug() << _thisProject.getOriginPath() + "/" + folderName;
         }
     }
 }
 
 void VersionCreatingForm::setFileOnDelete()
 {
-    _filesToDelete << _fsModel->fileInfo(ui->treeView->currentIndex()).absoluteFilePath();
+    QString fileToDelete = _fsModel->fileInfo(ui->treeView->currentIndex()).absoluteFilePath();
+    qDebug() << FileMover::moveFile(fileToDelete, _getPathToCurrentVersionFolder(QFileInfo(fileToDelete), "changed"));
+    _filesToDelete << fileToDelete;
 }
 
 void VersionCreatingForm::addFile()
@@ -55,8 +56,17 @@ void VersionCreatingForm::addFile()
     } else {
         QModelIndex currentIndex = !ui->treeView->currentIndex().isValid() ?
                     *_mdIndex : ui->treeView->currentIndex();
-        _filesToAddTo << _fsModel->fileInfo(currentIndex).absoluteFilePath();
+
+        QString fileToAddTo = _fsModel->fileInfo(currentIndex).absoluteFilePath() +
+                "/" + QFileInfo(filePath).fileName();
+
+        _filesToAddTo << fileToAddTo;
         _filesToAddFrom << filePath;
+
+        // Файлы копируются сразу, чтобы отобразить изменения в TreeView, при
+        // нажатии Отмена все добавленные файлы удалятся, удаленные -
+        // восстановятся
+        qDebug() << FileMover::copyFile(filePath, fileToAddTo);
     }
 }
 
@@ -71,32 +81,67 @@ void VersionCreatingForm::createFolderInVersion()
 
 void VersionCreatingForm::cancelClicked()
 {
-    foreach(QString folderPath, _newFolders) {
-        FileMover::removeDir(folderPath);
-    }
+    if (_isVersionChanged()) {
+        foreach(QString addedPath, _filesToAddTo) {
+            QFile(addedPath).remove(addedPath);
+        }
 
+        foreach(QString folderPath, _newFolders) {
+            FileMover::removeDir(folderPath);
+        }
+
+        foreach (QString deletedPath, _filesToDelete) {
+            FileMover::moveFile(_getPathToCurrentVersionFolder(QFileInfo(deletedPath), "changed"),
+                                            deletedPath);
+        }
+    }
     close();
 }
 
 void VersionCreatingForm::okClicked()
 {
-    QDir dir;
-    QString pathToMove = _storagetPath + _thisProject.getName() + "/" +
-            _thisProject.getCurrentVersion().getName() + "/changed/";
+    if (_isVersionChanged()) {
+        QString path = _storagetPath + _thisProject.getName() + "/Version "
+                + QString::number(_thisProject.getVersions().last().getId() + 1) + "/adds/";
+        QDir().mkpath(path);
 
-    foreach (QString filePath, _filesToDelete) {
-        qDebug() << FileMover::moveFile(filePath, pathToMove);
+        foreach (QString folderPath, _newFolders) {
+            QDir().mkdir(path + QFileInfo(folderPath).fileName());
+        }
+
+        int fileCount = _filesToAddTo.count();
+        for (int i(0); i < fileCount; ++i) {
+            FileMover::copyFile(_filesToAddFrom.at(i),
+                                _getPathToNewVersionFolder(QFileInfo(_filesToAddTo.at(i)), "adds"));
+        }
     }
-
-    QString pathToCopy = _storagetPath + _thisProject.getName() +
-            "/Version " + QString::number(_thisProject.getVersions().last().getId() + 1) + "/adds";
-
-    dir.mkpath(pathToCopy);
-    int fileCount = _filesToAddTo.count();
-    for (int i(0); i < fileCount; ++i) {
-        FileMover::copyFile(_filesToAddFrom.at(i), _filesToAddTo.at(i));
-        FileMover::copyFile(_filesToAddFrom.at(i), pathToCopy);
-    }
-
     close();
+}
+
+QString VersionCreatingForm::_getPathToNewVersionFolder(const QFileInfo& fileInfo, const QString& folderName)
+{
+    return _storagetPath + _thisProject.getName() +
+            "/Version " + QString::number(_thisProject.getVersions().last().getId() + 1) +
+            "/" + folderName + "/" + fileInfo.fileName();
+}
+
+QString VersionCreatingForm::_getPathToCurrentVersionFolder(const QFileInfo& fileInfo, const QString& folderName)
+{
+    return _storagetPath + _thisProject.getName() + "/" + _currentVersion.getName() +
+            "/" + folderName + "/" + fileInfo.fileName();
+}
+
+bool VersionCreatingForm::_isVersionChanged()
+{
+    return  !_filesToAddFrom.empty() ||
+            !_filesToAddTo.empty() ||
+            !_filesToDelete.empty() ||
+            !_newFolders.empty();
+}
+
+void VersionCreatingForm::on_treeView_pressed(const QModelIndex& index)
+{
+    if (index.isValid()) {
+        ui->deleteButton->setEnabled(true);
+    }
 }

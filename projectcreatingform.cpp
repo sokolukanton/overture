@@ -21,8 +21,8 @@ ProjectCreatingForm::~ProjectCreatingForm()
 
 void ProjectCreatingForm::addProject()
 {
-    if (ui->lineEdit_3->text() != ""){
-        if (ui->lineEdit->text() != ""){
+    if (ui->lineEdit_3->text() != "") {
+        if (ui->lineEdit->text() != "") {
             QDirIterator iter(ui->lineEdit_3->text(), QDirIterator::Subdirectories);
             QVector<Element> elements;
             while (iter.hasNext()) {
@@ -60,7 +60,7 @@ void ProjectCreatingForm::addProject()
 
 void ProjectCreatingForm::choosePath()
 {
-    _newProjectPath=QFileDialog::getExistingDirectory(this, tr("Выберите папку для которой будет осуществляться контроль версий"),"/home",
+    _newProjectPath = QFileDialog::getExistingDirectory(this, tr("Выберите папку для которой будет осуществляться контроль версий"),"/home",
                                                       QFileDialog::ShowDirsOnly| QFileDialog::DontResolveSymlinks);
     ui->lineEdit_3->setText(_newProjectPath);
 }
@@ -87,4 +87,13 @@ void ProjectCreatingForm::_createProjectFolder(const QString& projName, const QS
     dir.cd(_storagePath + "/" + projName + "/" + verName);
     dir.mkdir("adds");
     dir.mkdir("changed");
+}
+
+void ProjectCreatingForm::on_lineEdit_3_textChanged(const QString &arg1)
+{
+    if (arg1 != "") {
+        ui->pushButton_3->setEnabled(true);
+    } else {
+        ui->pushButton_3->setEnabled(false);
+    }
 }

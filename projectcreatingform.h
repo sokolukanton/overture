@@ -22,8 +22,9 @@ public:
 private slots:
     void addProject();
     void choosePath();
+    void on_lineEdit_3_textChanged(const QString &arg1);
 
-private:  
+private:
     Ui::ProjectCreatingForm *ui;
     QVector<Project> *_projects;
     QString _newProjectPath;

@@ -94,7 +94,7 @@
         <item row="5" column="0">
          <widget class="QPushButton" name="pushButton_5">
           <property name="text">
-           <string>Закрыть</string>
+           <string>Выход</string>
           </property>
          </widget>
         </item>

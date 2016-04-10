@@ -165,7 +165,7 @@ public:
         pushButton_2->setText(QApplication::translate("MainWindow", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\264\320\265\321\202\320\260\320\273\320\270", 0));
         pushButton_3->setText(QApplication::translate("MainWindow", "\320\237\320\265\321\200\320\265\320\270\320\274\320\265\320\275\320\276\320\262\320\260\321\202\321\214", 0));
         pushButton_4->setText(QApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 ", 0));
-        pushButton_5->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\272\321\200\321\213\321\202\321\214", 0));
+        pushButton_5->setText(QApplication::translate("MainWindow", "\320\222\321\213\321\205\320\276\320\264", 0));
         menu->setTitle(QApplication::translate("MainWindow", "\320\237\321\200\320\276\320\265\320\272\321\202", 0));
     } // retranslateUi
 

@@ -91,6 +91,7 @@ public:
 
         pushButton_3 = new QPushButton(ProjectCreatingForm);
         pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+        pushButton_3->setEnabled(false);
 
         horizontalLayout_2->addWidget(pushButton_3);
 

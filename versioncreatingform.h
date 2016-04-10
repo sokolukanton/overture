@@ -35,6 +35,8 @@ private slots:
     void cancelClicked();
     void okClicked();
 
+    void on_treeView_pressed(const QModelIndex &index);
+
 private:
     Ui::VersionCreatingForm *ui;
     AddNewFolderForm* newFolderForm;
@@ -49,6 +51,10 @@ private:
     QStringList _filesToAddTo;
     QStringList _filesToDelete;
     QStringList _newFolders;
+
+    QString _getPathToNewVersionFolder(const QFileInfo &, const QString &);
+    QString _getPathToCurrentVersionFolder(const QFileInfo &, const QString &);
+    bool _isVersionChanged();
 };
 
 #endif // VERSIONCREATINGFORM_H

@@ -28,9 +28,9 @@ public:
     QGridLayout *gridLayout_5;
     QGridLayout *gridLayout_2;
     QGridLayout *gridLayout;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton_3;
+    QPushButton *folderCreateButton;
+    QPushButton *deleteButton;
+    QPushButton *addButton;
     QSpacerItem *verticalSpacer;
     QTreeView *treeView;
     QGridLayout *gridLayout_4;
@@ -51,20 +51,21 @@ public:
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         gridLayout = new QGridLayout();
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        pushButton = new QPushButton(VersionCreatingForm);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
+        folderCreateButton = new QPushButton(VersionCreatingForm);
+        folderCreateButton->setObjectName(QStringLiteral("folderCreateButton"));
 
-        gridLayout->addWidget(pushButton, 1, 0, 1, 1);
+        gridLayout->addWidget(folderCreateButton, 1, 0, 1, 1);
 
-        pushButton_2 = new QPushButton(VersionCreatingForm);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        deleteButton = new QPushButton(VersionCreatingForm);
+        deleteButton->setObjectName(QStringLiteral("deleteButton"));
+        deleteButton->setEnabled(false);
 
-        gridLayout->addWidget(pushButton_2, 2, 0, 1, 1);
+        gridLayout->addWidget(deleteButton, 2, 0, 1, 1);
 
-        pushButton_3 = new QPushButton(VersionCreatingForm);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+        addButton = new QPushButton(VersionCreatingForm);
+        addButton->setObjectName(QStringLiteral("addButton"));
 
-        gridLayout->addWidget(pushButton_3, 0, 0, 1, 1);
+        gridLayout->addWidget(addButton, 0, 0, 1, 1);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -114,9 +115,9 @@ public:
     void retranslateUi(QDialog *VersionCreatingForm)
     {
         VersionCreatingForm->setWindowTitle(QApplication::translate("VersionCreatingForm", "\320\235\320\276\320\262\320\260\321\217 \320\262\320\265\321\200\321\201\320\270\321\217", 0));
-        pushButton->setText(QApplication::translate("VersionCreatingForm", "\320\241\320\276\320\267\320\264\320\260\321\202\321\214 \320\277\320\260\320\277\320\272\321\203", 0));
-        pushButton_2->setText(QApplication::translate("VersionCreatingForm", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214", 0));
-        pushButton_3->setText(QApplication::translate("VersionCreatingForm", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \321\204\320\260\320\271\320\273\321\213/\320\277\320\260\320\277\320\272\320\270", 0));
+        folderCreateButton->setText(QApplication::translate("VersionCreatingForm", "\320\241\320\276\320\267\320\264\320\260\321\202\321\214 \320\277\320\260\320\277\320\272\321\203", 0));
+        deleteButton->setText(QApplication::translate("VersionCreatingForm", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214", 0));
+        addButton->setText(QApplication::translate("VersionCreatingForm", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \321\204\320\260\320\271\320\273\321\213/\320\277\320\260\320\277\320\272\320\270", 0));
         okButton->setText(QApplication::translate("VersionCreatingForm", "\320\236\320\232", 0));
         cancelButton->setText(QApplication::translate("VersionCreatingForm", "\320\236\321\202\320\274\320\265\320\275\320\260", 0));
     } // retranslateUi
